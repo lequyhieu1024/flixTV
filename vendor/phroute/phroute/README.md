@@ -212,7 +212,7 @@ $router->group(['prefix' => 'admin'], function($router){
     });
 
     $router->get('products', function(){
-        return 'teacher management';
+        return 'product management';
     });
 
     $router->get('orders', function(){

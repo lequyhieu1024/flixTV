@@ -19,7 +19,7 @@ $collector->group(array('prefix' => 'admin'), function(RouteCollector $collector
         });
 
         $collector->get('products', function(){
-            return 'teacher management';
+            return 'product management';
         });
     });
 
