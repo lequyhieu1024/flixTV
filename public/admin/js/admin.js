@@ -57,7 +57,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		$.magnificPopup.close();
 	});
-
+	
 	/*==============================
 	Select2
 	==============================*/

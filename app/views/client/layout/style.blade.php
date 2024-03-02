@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ BASE_URL.'public/client/'}}css/bootstrap-reboot.min.css">
+{{-- <link rel="stylesheet" href="{{ BASE_URL.'public/client/'}}css/bootstrap.min.css"> --}}
 <link rel="stylesheet" href="{{ BASE_URL.'public/client/'}}css/bootstrap-grid.min.css">
 <link rel="stylesheet" href="{{ BASE_URL.'public/client/'}}css/owl.carousel.min.css">
 <link rel="stylesheet" href="{{ BASE_URL.'public/client/'}}css/slider-radio.css">
@@ -6,3 +7,116 @@
 <link rel="stylesheet" href="{{ BASE_URL.'public/client/'}}css/magnific-popup.css">
 <link rel="stylesheet" href="{{ BASE_URL.'public/client/'}}css/plyr.css">
 <link rel="stylesheet" href="{{ BASE_URL.'public/client/'}}css/main.css">
+<style>
+ .modal {
+  position: relative;
+  display: block;
+  background-color: #151f30;
+  margin: 40px auto;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.modal .mfp-close {
+  display: none;
+}
+.modal__title {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  color: #fff;
+  font-size: 28px;
+  line-height: 100%;
+  margin-bottom: 15px;
+  text-align: center;
+  display: block;
+}
+.modal__text {
+  font-size: 14px;
+  line-height: 24px;
+  color: #e0e0e0;
+  font-weight: 400;
+  display: block;
+  text-align: center;
+  margin-bottom: 0;
+}
+.modal__btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.modal__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: calc(50% - 10px);
+  border-radius: 16px;
+  font-size: 14px;
+  color: #e0e0e0;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.modal__btn--apply {
+  background-color: #2f80ed;
+}
+.modal__btn--apply:hover {
+  color: #29b474;
+  background-color: #fff;
+}
+.modal__btn--dismiss {
+  background-color: #fff;
+  color: #151f30;
+}
+.modal__btn--dismiss:hover {
+  color: #eb5757;
+  background-color: #fff;
+}
+.modal--view {
+  padding: 20px 0 0 0;
+  max-width: 700px;
+}
+@media (min-width: 768px) {
+  .modal {
+    padding: 30px;
+  }
+  .modal--view {
+    padding: 20px 0 0 0;
+  }
+  .modal__btns {
+    margin-top: 30px;
+  }
+  .modal__btn {
+    width: calc(50% - 15px);
+  }
+}
+.mfp-bg {
+  background: rgba(19,23,32,0.8);
+}
+.my-mfp-zoom-in .zoom-anim-dialog {
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  transform: scale(0.8);
+}
+.my-mfp-zoom-in.mfp-ready .zoom-anim-dialog {
+  opacity: 1;
+  transform: scale(1);
+}
+.my-mfp-zoom-in.mfp-removing .zoom-anim-dialog {
+  transform: scale(0.8);
+  opacity: 0;
+}
+.my-mfp-zoom-in.mfp-bg {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+.my-mfp-zoom-in.mfp-ready.mfp-bg {
+  opacity: 1;
+}
+.my-mfp-zoom-in.mfp-removing.mfp-bg {
+  opacity: 0;
+}
+	</style>

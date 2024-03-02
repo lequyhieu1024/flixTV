@@ -5,17 +5,30 @@
 				<div class="col-12">
 					<div class="sign__content">
 						<!-- authorization form -->
-						<form action="#" class="sign__form">
+						<form method="POST" class="sign__form">
 							<a href="{{BASE_URL}}" class="sign__logo">
 								<img src="{{IMG_URL}}/logo.svg" alt="">
 							</a>
-
+							@if (isset($_SESSION['errors']) && isset($_GET['msg']))
+								<span id="only" style="color:red">{{ $_SESSION['errors']['users'] }}</span>
+							@endif
+							@if (isset($_SESSION['success']) && isset($_GET['msg']))
+								<span style="color:green">{{$_SESSION['success']}}</span>
+							@endif
 							<div class="sign__group">
-								<input type="text" class="sign__input" placeholder="Email">
+								<input type="text" class="sign__input input_email" name="email" placeholder="Email">
+								<span style="color:red" class='email'></span>
+									@if (isset($_SESSION['errors']) && isset($_GET['msg']))
+									<span style="color:red" class="password">{{$_SESSION['errors']['email']}}</span>
+									@endif
 							</div>
 
 							<div class="sign__group">
-								<input type="password" class="sign__input" placeholder="Password">
+								<input type="password" class="sign__input input_password" name="password" placeholder="Mật khẩu">
+								<span style="color:red" class='password'></span>
+								@if (isset($_SESSION['errors']) && isset($_GET['msg']))
+								<span style="color:red" class="password">{{$_SESSION['errors']['password']}}</span>
+								@endif
 							</div>
 
 							<div class="sign__group sign__group--checkbox">
@@ -23,7 +36,7 @@
 								<label for="remember">Remember Me</label>
 							</div>
 							
-							<button class="sign__btn" type="button">Sign in</button>
+							<button class="sign__btn" type="submit">Đăng nhập</button>
 
 							<span class="sign__delimiter">or</span>
 
@@ -33,9 +46,9 @@
 								<a class="gl" href="#"><svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><path d='M473.16 221.48l-2.26-9.59H262.46v88.22H387c-12.93 61.4-72.93 93.72-121.94 93.72-35.66 0-73.25-15-98.13-39.11a140.08 140.08 0 01-41.8-98.88c0-37.16 16.7-74.33 41-98.78s61-38.13 97.49-38.13c41.79 0 71.74 22.19 82.94 32.31l62.69-62.36C390.86 72.72 340.34 32 261.6 32c-60.75 0-119 23.27-161.58 65.71C58 139.5 36.25 199.93 36.25 256s20.58 113.48 61.3 155.6c43.51 44.92 105.13 68.4 168.58 68.4 57.73 0 112.45-22.62 151.45-63.66 38.34-40.4 58.17-96.3 58.17-154.9 0-24.67-2.48-39.32-2.59-39.96z'/></svg></a>
 							</div>
 
-							<span class="sign__text">Don't have an account? <a href="signup.html">Sign up!</a></span>
+							<span class="sign__text">Bạn chưa có tài khoản ? <a href="{{route('sign-up')}}">Đăng ký!</a></span>
 
-							<span class="sign__text"><a href="forgot.html">Forgot password?</a></span>
+							<span class="sign__text"><a href="{{route('forgot-password')}}">Quên mật khẩu ?</a></span>
 						</form>
 						<!-- end authorization form -->
 					</div>
@@ -44,3 +57,31 @@
 		</div>
 	</div>
     @include('client.layout.script')
+	<script>
+		const password = document.querySelector('.input_password');
+		const email = document.querySelector('.input_email');
+		const only = document.querySelector('#only')
+		if (only ?? false) {
+			email.focus()
+		} 	
+		const btnSubmit = document.querySelector('.sign__btn')
+		btnSubmit.addEventListener('click', (e) => {
+			e.preventDefault();
+			email.focus()
+			if(email.value.trim() === ""){
+				document.querySelector('.email').innerHTML = "Chưa nhập email"
+				email.focus();
+				return false;
+			}else {
+				document.querySelector('.email').innerHTML = "";
+			}
+			if(password.value.trim() === ""){
+				document.querySelector('.password').innerHTML = "Chưa nhập mật khẩu"
+				password.focus();
+				return false;
+			}else {
+				document.querySelector('.password').innerHTML = "";
+			}
+			document.querySelector('.sign__form').submit();
+		})
+	</script>

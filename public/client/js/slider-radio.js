@@ -19,7 +19,6 @@ window.addEventListener('load', function() {
 		const radios = sliderRadio.querySelectorAll("input[type='radio']");
 		for(let i = 0; i < radios.length; i++) {if(radios[i].checked) radios[i].click() }
 	}
-
 	function handleLabelClick(e) {
 		let label;
 		let radio;

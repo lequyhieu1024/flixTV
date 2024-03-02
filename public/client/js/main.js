@@ -451,7 +451,7 @@ $(document).ready(function () {
 			alwaysShowTracks: true,
 			continuousScrolling: true
 		});
+		
 	}
-
-
+	
 });

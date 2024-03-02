@@ -16,6 +16,9 @@ class Genres extends BaseModel implements InterfaceModel
     }
     public function detail($id)
     {
+        $sql = "SELECT * FROM $this->table WHERE id = ?";
+        $this->setQuery($sql);
+        return $this->loadRow([$id]);
     }
     public function add($data)
     {
@@ -30,9 +33,25 @@ class Genres extends BaseModel implements InterfaceModel
     }
     public function edit($id, $data)
     {
+        $name = $data['name'];
+        $thumbnail = $data['thumbnail'];
+        if ($data['thumbnail'] != "") {
+            $sql = "UPDATE `$this->table` SET `name` = ? ,`thumbnail`=? WHERE id = ?";
+            $options = [$name, $thumbnail, $id];
+            $this->setQuery($sql);
+            return $this->execute($options);
+        } else {
+            $sql = "UPDATE `$this->table` SET `name` = ? WHERE id = ?";
+            $options = [$name, $id];
+            $this->setQuery($sql);
+            return $this->execute($options);
+        }
     }
     public function delete($id)
     {
+        $sql = "DELETE FROM $this->table WHERE id = ?";
+        $this->setQuery($sql);
+        return $this->execute([$id]);
     }
     public function flag($id, $flag)
     {

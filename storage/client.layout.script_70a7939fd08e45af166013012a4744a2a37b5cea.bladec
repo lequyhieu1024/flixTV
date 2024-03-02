@@ -1,10 +1,25 @@
-
-	<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/jquery-3.5.1.min.js"></script>
-	<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/bootstrap.bundle.min.js"></script>
-	<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/owl.carousel.min.js"></script>
-	<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/slider-radio.js"></script>
-	<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/select2.min.js"></script>
-	<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/smooth-scrollbar.js"></script>
-	<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/jquery.magnific-popup.min.js"></script>
-	<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/plyr.min.js"></script>
-	<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/main.js"></script>
+<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/jquery-3.5.1.min.js"></script>
+<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/bootstrap.bundle.min.js"></script>
+<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/owl.carousel.min.js"></script>
+<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/slider-radio.js"></script>
+<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/select2.min.js"></script>
+<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/smooth-scrollbar.js"></script>
+<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/jquery.magnific-popup.min.js"></script>
+<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/plyr.min.js"></script>
+<script src="<?php echo \htmlentities(BASE_URL.'public/client/'??'', ENT_QUOTES, 'UTF-8', false); ?>js/main.js"></script>
+<script>
+	const apply = document.querySelector('.btn-apply');
+	apply.addEventListener('click',() => {
+ window.location.href = "<?php echo \htmlentities(route('sign-out')??'', ENT_QUOTES, 'UTF-8', false); ?>"
+	})
+	// console.log(apply)
+	$('.modal__btn--dismiss').on('click', function (e) {
+ e.preventDefault();
+ $.magnificPopup.close();
+	});
+</script>
+<?php /* <script>
+	window.addEventListener('unload', function() {
+ alert('jis')
+	});
+</script> */ ?>

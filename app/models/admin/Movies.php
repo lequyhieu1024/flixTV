@@ -12,7 +12,7 @@ class Movies extends BaseModel implements InterfaceModel
     public function list()
     {
         $sql = "SELECT $this->table.id,title,rating,$this->table2.name,author,$this->table.flag,release_date FROM $this->table
-        JOIN $this->table2 ON $this->table.genre_id = $this->table2.id";
+        JOIN $this->table2 ON $this->table.genre_id = $this->table2.id ORDER BY $this->table.id DESC";
         $this->setQuery($sql);
         return $this->loadAllRows([]);
     }
@@ -58,19 +58,33 @@ class Movies extends BaseModel implements InterfaceModel
         $nation = $data['nation'];
         $rating = $data['rating'];
         $thumbnail_movie = $data['thumbnail_movie'];
+        $thumbnail_trailer = $data['thumbnail_trailer'];
 
-        $options1 = [$link_trailer, $link_movie, $title,  $description, $release_date, $duration_minutes, $author, $genre_id, $nation, $rating, $thumbnail_movie, $id];
-        $options2 = [$link_trailer, $link_movie, $title,  $description, $release_date, $duration_minutes, $author, $genre_id, $nation, $rating, $id];
-        if ($thumbnail_movie == "") {
+
+        if ($thumbnail_movie != "" && $thumbnail_trailer != "") {
+            $sql = "UPDATE `$this->table` SET `link_trailer`=?, `link_movie`=?, `title`=?, `description`=?,
+            `release_date`=?, `duration_minutes`=?, `author`=?, `genre_id`=?, `nation`=?, `rating`=?,`thumbnail_movie`=?,`thumbnail_trailer`=? WHERE id=?";
+            $options = [$link_trailer, $link_movie, $title,  $description, $release_date, $duration_minutes, $author, $genre_id, $nation, $rating, $thumbnail_movie, $thumbnail_trailer, $id];
+            $this->setQuery($sql);
+            return $this->execute($options);
+        } else if ($thumbnail_movie == "" && $thumbnail_trailer != "") {
+            $sql = "UPDATE `$this->table` SET `link_trailer`=?, `link_movie`=?, `title`=?, `description`=?,
+            `release_date`=?, `duration_minutes`=?, `author`=?, `genre_id`=?, `nation`=?, `rating`=?,`thumbnail_trailer`=? WHERE id=?";
+            $options = [$link_trailer, $link_movie, $title,  $description, $release_date, $duration_minutes, $author, $genre_id, $nation, $rating, $thumbnail_trailer, $id];
+            $this->setQuery($sql);
+            return $this->execute($options);
+        } else if ($thumbnail_movie != "" && $thumbnail_trailer == "") {
+            $sql = "UPDATE `$this->table` SET `link_trailer`=?, `link_movie`=?, `title`=?, `description`=?,
+            `release_date`=?, `duration_minutes`=?, `author`=?, `genre_id`=?, `nation`=?, `rating`=?,`thumbnail_movie`=? WHERE id=?";
+            $options = [$link_trailer, $link_movie, $title,  $description, $release_date, $duration_minutes, $author, $genre_id, $nation, $rating, $thumbnail_movie, $id];
+            $this->setQuery($sql);
+            return $this->execute($options);
+        } else {
             $sql = "UPDATE `$this->table` SET `link_trailer`=?, `link_movie`=?, `title`=?, `description`=?,
             `release_date`=?, `duration_minutes`=?, `author`=?, `genre_id`=?, `nation`=?, `rating`=? WHERE id=?";
+            $options = [$link_trailer, $link_movie, $title,  $description, $release_date, $duration_minutes, $author, $genre_id, $nation, $rating,  $id];
             $this->setQuery($sql);
-            return $this->execute($options2);
-        } else {
-            $sql = "UPDATE `$this->table` SET `link_traler`=?, `link_movie`=?, `title`=?, `description`=?,
-        `release_date`=?, `duration_minutes`=?, `author`=?, `genre_id`=?, `nation`=?, `rating`=?, `thumbnail_movie`=? WHERE id=?";
-            $this->setQuery($sql);
-            return $this->execute($options1);
+            return $this->execute($options);
         }
     }
     public function delete($id)

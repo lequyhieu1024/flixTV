@@ -39,7 +39,10 @@
 					</div>
 				</div>
 				<!-- end main title -->
-
+					@if (isset($_SESSION['success']) && isset($_GET['msg']))
+						<span style="color:green">{{$_SESSION['success']}} </span> <br>
+					@endif
+				</div> <br>
 				<!-- comments -->
 				<div class="col-12">
 					<div class="main__table-wrap">
@@ -74,10 +77,10 @@
 									</td>
 									<td>
 										<div class="main__table-btns">
-											<a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
+											<a href="{{ routeAdmin('genres/update-flag/'.$item->id.'/'.$item->flag) }}" onclick="return confirm('Bạn có muốn thay đổi trạng thái?')" class="main__table-btn main__table-btn--banned">
 												<svg xmlns="http://www.w3.org/2000/svg" <?php echo $stroke ?>  viewBox="0 0 24 24"><path d="M12,13a1.49,1.49,0,0,0-1,2.61V17a1,1,0,0,0,2,0V15.61A1.49,1.49,0,0,0,12,13Zm5-4V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z" /></svg>
 											</a>
-											<div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
+											{{-- <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
 												<h6 class="modal__title">Thay đổi trạng thái</h6>
 
 												<p class="modal__text">Bạn chắc chắn muốn thay đổi trạng thái ?</p>
@@ -86,16 +89,16 @@
 													<button class="modal__btn modal__btn--apply apply-change" data-flag="{{$item->flag}}" data-id="{{$item->id}}" type="button">Đồng ý</button>
 													<button class="modal__btn modal__btn--dismiss dismis-change" type="button">Hủy</button>
 												</div>
-											</div>
+											</div> --}}
 											{{-- {{routeAdmin('movies/edit/'.$item->id)}} --}}
-											<a href="" class="main__table-btn main__table-btn--edit">
+											<a href="{{ routeAdmin('genres/edit/'.$item->id) }}" class="main__table-btn main__table-btn--edit">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z"/></svg>
 											</a>
-											<a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+											<a href="{{ routeAdmin('genres/delete/'.$item->id) }}" onclick="return confirm('Bạn có muốn xóa không ?')" class="main__table-btn main__table-btn--delete">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"/></svg>
 											</a>
 												<!-- modal delete -->
-											<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+											{{-- <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
 												<h6 class="modal__title">Xóa phim</h6>
 
 												<p class="modal__text">Bạn có chắc muốn xóa phim này ?</p>
@@ -104,7 +107,7 @@
 													<button class="modal__btn modal__btn--apply apply-del" data-flag="{{$item->flag}}" data-id="{{$item->id}}" type="button">Xóa</button>
 													<button class="modal__btn modal__btn--dismiss dismiss-del" type="button">Hủy</button>
 												</div>
-											</div>
+											</div> --}}
 										</div>
 									</td>
 								</tr>
@@ -150,7 +153,7 @@
 
 @endsection
 @section('script')
-	<script>
+	{{-- <script>
 		const applyChange = document.querySelector('.apply-change');
 		const applyDel = document.querySelector('.apply-del');
 		applyChange.addEventListener('click',() =>{
@@ -164,5 +167,5 @@
 			window.location.href = "{{ routeAdmin('movies/delete/') }}" + id;
 		})
 
-	</script>
+	</script> --}}
 @endsection

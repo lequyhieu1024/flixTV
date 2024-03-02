@@ -81,7 +81,7 @@
 
 									<div class="col-12 col-lg-6">
 										<div class="form__group">
-											<select class="js-example-basic-multiple" name="genre_id" id="genre" multiple="multiple">
+											<select class="js-example-basic-multiple" name="genre_id" id="genre">
 												@foreach ($genres as $item)
 													<option value="{{$item->id}}">{{$item->name}}</option>
 												@endforeach

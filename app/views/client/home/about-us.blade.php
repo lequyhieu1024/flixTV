@@ -9,8 +9,8 @@
 
 				<div class="col-12 col-xl-6">
 					<ul class="breadcrumb">
-						<li class="breadcrumb__item"><a href="index.html">Home</a></li>
-						<li class="breadcrumb__item breadcrumb__item--active">Contacts</li>
+						<li class="breadcrumb__item"><a href="{{BASE_URL}}">Home</a></li>
+						<li class="breadcrumb__item breadcrumb__item--active">Về chúng tôi</li>
 					</ul>
 				</div>
 			</div>

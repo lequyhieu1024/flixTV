@@ -25,6 +25,20 @@ function redirect($key = "", $msg = "", $url = "")
     header('location: ' . ADMIN_URL . $url . "?msg=" . $key);
     die;
 }
+function redirectClient($key = "", $msg = "", $url = "")
+{
+    $_SESSION[$key] = $msg;
+    switch ($key) {
+        case "errors":
+            unset($_SESSION['success']);
+            break;
+        case "success":
+            unset($_SESSION['errors']);
+            break;
+    }
+    header('location: ' . BASE_URL . $url . "?msg=" . $key);
+    die;
+}
 
 function route($name)
 {
@@ -84,4 +98,11 @@ function convert_slug($str)
     $str = trim($str, '-');
 
     return $str;
+}
+
+function chuyen_dau_cach($s)
+{
+    // Sử dụng hàm str_replace() để thay thế dấu '-' bằng dấu cách ' '
+    $s = str_replace('-', ' ', $s);
+    return $s;
 }
