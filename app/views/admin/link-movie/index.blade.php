@@ -7,7 +7,7 @@
 				<div class="col-12">
 					<div class="main__title">
 						<h2><a href="{{routeAdmin('links/add')}}" class="main__title-link">+ tập phim mới</a></h2>
-
+							<span class="main__title-stat">Tổng: {{!empty($count) ? $count : 0}}</span>
 						<div class="main__title-wrap">
 							<!-- filter sort -->
 							<div class="filter" id="filter__sort">

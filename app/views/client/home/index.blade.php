@@ -115,7 +115,7 @@
 								<ul class="card__list card__list--subs">
 									<li>
 										@if (isset($count[$item->name]))
-											{{ $count[$item->name] }}
+											Lên tới {{ $count[$item->name] }} bộ phim
 										@else
 											Chưa có phim
 										@endif

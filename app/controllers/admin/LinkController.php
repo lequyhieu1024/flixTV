@@ -21,10 +21,11 @@ class LinkController extends BaseController implements InterfaceController
     }
     public function index()
     {
+        $count = $this->link->count();
         $links = $this->link->list();
         // $movies = $this->movie->list();
         // print_r($links);
-        return $this->render('admin.link-movie.index', compact('links'));
+        return $this->render('admin.link-movie.index', compact('links', 'count'));
     }
     public function create()
     {

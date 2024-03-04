@@ -11,7 +11,7 @@ class Movies extends BaseModel implements InterfaceModel
     protected $table2 = 'genres';
     public function list()
     {
-        $sql = "SELECT $this->table.id,title,rating,$this->table2.name,author,$this->table.flag,release_date FROM $this->table
+        $sql = "SELECT $this->table.id,title,rating,$this->table2.name,author,$this->table.flag,release_date,views FROM $this->table
         JOIN $this->table2 ON $this->table.genre_id = $this->table2.id ORDER BY $this->table.id DESC";
         $this->setQuery($sql);
         return $this->loadAllRows([]);
@@ -102,5 +102,19 @@ class Movies extends BaseModel implements InterfaceModel
         }
         $this->setQuery($sql);
         return $this->execute([$id]);
+    }
+    public function count()
+    {
+        $sql = "SELECT count(*) as total FROM $this->table";
+        $this->setQuery($sql);
+        $result = $this->execute();
+        return $result->fetchColumn();
+    }
+    public function sortViews()
+    {
+        $sql = "SELECT $this->table.id,title,rating,$this->table2.name,author,$this->table.flag,release_date,views FROM $this->table
+        JOIN $this->table2 ON $this->table.genre_id = $this->table2.id ORDER BY views DESC";
+        $this->setQuery($sql);
+        return $this->loadAllRows([]);
     }
 }

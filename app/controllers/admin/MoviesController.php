@@ -22,8 +22,9 @@ class MoviesController extends BaseController implements InterfaceController
     public function index()
     {
         $movies = $this->movie->list();
+        $count = $this->movie->count();
         // print_r($movies);
-        return $this->render('admin.movies.index', compact('movies'));
+        return $this->render('admin.movies.index', compact('movies', 'count'));
     }
     public function create()
     {

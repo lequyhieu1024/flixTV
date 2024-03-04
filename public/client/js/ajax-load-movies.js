@@ -92,3 +92,6 @@ const newest = document.querySelector('#Featured');
         });
 		contentChanged.innerHTML = newHTML;
 	}
+
+
+    

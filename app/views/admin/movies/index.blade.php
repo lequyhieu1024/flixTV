@@ -8,12 +8,12 @@
 					<div class="main__title">
 						<h2><a href="{{routeAdmin('movies/add')}}" class="main__title-link">+ phim mới</a></h2>
 
-						<span class="main__title-stat">Hiện có: 14 452 phim</span>
+						<span class="main__title-stat">Tổng: {{!empty($count) ? $count : 0}}</span>
 
 						<div class="main__title-wrap">
 							<!-- filter sort -->
 							<div class="filter" id="filter__sort">
-								<span class="filter__item-label">Sort by:</span>
+								<span class="filter__item-label">Sắp xếp theo:</span>
 
 								<div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<input type="button" value="Date created">
@@ -21,9 +21,9 @@
 								</div>
 
 								<ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-									<li>Date created</li>
-									<li>Rating</li>
-									<li>Views</li>
+									<li class="date_created">Date created</li>
+									<li class="rating">Rating</li>
+									<li class="views">Views</li>
 								</ul>
 							</div>
 							<!-- end filter sort -->
@@ -52,6 +52,7 @@
 								<tr>
 									<th>ID</th>
 									<th>Tên</th>
+									<th>Người xem</th>
 									<th>Đánh giá </th>
 									<th>Danh mục</th>
 									{{-- <th>Tác giả</th> --}}
@@ -69,6 +70,9 @@
 									</td>
 									<td>
 										<div class="main__table-text"><a href="{{routeAdmin('movies/detail/'.$item->id)}}">{{ $item->title }}</a></div>
+									</td>
+									<td>
+										<div class="main__table-text">{{ $item->views }}</div>
 									</td>
 									<td>
 										<div class="main__table-text main__table-text--rate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z"/></svg> {{ $item->rating }}</div>
@@ -172,8 +176,8 @@
 		</div>
 	</div> --}}
 @endsection
-@section('script')
-	{{-- <script>
+{{-- @section('script')
+	<script>
 		const applyChange = document.querySelector('.btn-change');
 		const applyDel = document.querySelector('.btn-del');
 		applyChange.addEventListener('click',() =>{
@@ -187,5 +191,8 @@
 			window.location.href = "{{ routeAdmin('movies/delete/') }}" + id;
 		})
 
-	</script> --}}
+	</script>
+@endsection --}}
+@section('script')
+	<script src="{{BASE_URL}}/public/admin/js/movies-ajax.js"></script>
 @endsection

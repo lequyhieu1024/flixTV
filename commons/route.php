@@ -1,12 +1,14 @@
 <?php
 
 use App\Controllers\Admin\CommentsController;
+use App\Controllers\Admin\ContactsController;
 use App\Controllers\Admin\GenresController as AdminGenresController;
 use App\Controllers\Admin\HomeController as AdminHomeController;
 use App\Controllers\Admin\LinkController;
 use App\Controllers\Admin\MoviesController;
 use App\Controllers\Admin\UsersController;
-use App\Controllers\Api\ApiController;
+use App\Controllers\Api\AdminApiController;
+use App\Controllers\Api\ClientApiController;
 use App\Controllers\Client\CommentsController as ClientCommentsController;
 use App\Controllers\Client\GenresController;
 use App\Controllers\Client\HomeController;
@@ -43,6 +45,9 @@ $router->group(['prefix' => 'admin', 'before' => 'auth'], function ($router) {
         $router->get('delete/{id}', [MoviesController::class, 'destroy']);
         $router->get('detail/{id}', [MoviesController::class, 'detail']);
         $router->get('update-flag/{id}/{flag}', [MoviesController::class, 'updateFlag']);
+
+        // ajjax
+        $router->get('sort-by-views', [AdminApiController::class, 'sortByViewMovies']);
     });
     $router->group(['prefix' => 'genres'], function ($router) {
         $router->get('/', [AdminGenresController::class, 'index']);
@@ -64,10 +69,18 @@ $router->group(['prefix' => 'admin', 'before' => 'auth'], function ($router) {
     $router->group(['prefix' => 'users'], function ($router) {
         $router->get('/', [UsersController::class, 'index']);
         $router->get('delete/{id}', [UsersController::class, 'destroy']);
+        $router->get('soft-by-verified-email', [AdminApiController::class, 'sortByVerified']);
+        $router->get('soft-by-created-date', [AdminApiController::class, 'sortByCreatedDate']);
+        $router->get('soft-by-online', [AdminApiController::class, 'sortByOnline']);
     });
     $router->group(['prefix' => 'comments'], function ($router) {
         $router->get('/', [CommentsController::class, 'index']);
         $router->get('delete/{id}', [CommentsController::class, 'destroy']);
+    });
+    $router->group(['prefix' => 'contacts'], function ($router) {
+        $router->get('/', [ContactsController::class, 'index']);
+        $router->get('delete/{id}', [ContactsController::class, 'destroy']);
+        $router->get('update-flag/{id}/{flag}', [ContactsController::class, 'updateFlag']);
     });
 });
 
@@ -78,25 +91,27 @@ $router->get('/', [HomeController::class, 'index']);
 // chi tiết phim
 $router->get('detail/{id}/{slug}', [MovieController::class, 'detail']);
 //phim theo thể loại
-$router->get('movies-by-genres/{id}', [MovieController::class, 'moviesByGenres']);
+$router->get('movies-by-genres/{id}/{slug}', [MovieController::class, 'moviesByGenres']);
 //danh sách thể loại
 $router->get('list-genres', [GenresController::class, 'list']);
 // tìm kiếm
 $router->post('search', [MovieController::class, 'searching']);
 
 //load 30 phim nhiều ng xem ajax
-$router->get('get-viewest-movies', [ApiController::class, 'getViewestMovies']);
-$router->get('get-newest-movies', [ApiController::class, 'getNewestMovies']);
+$router->get('get-viewest-movies', [ClientApiController::class, 'getViewestMovies']);
+$router->get('get-newest-movies', [ClientApiController::class, 'getNewestMovies']);
 //all comment ajax
-$router->get('load-comments/{id}', [ApiController::class, 'getAllComments']);
+$router->get('load-comments/{id}', [ClientApiController::class, 'getAllComments']);
 
 //comment
-$router->post('send-comment/{id}/{slug}', [ClientCommentsController::class, 'sendCommentStore']);
+// $router->post
+// $router->post('send-comment/{id}/{slug}', [ClientCommentsController::class, 'sendCommentStore']);
 
 // about us
 $router->get('about-us', [HomeController::class, 'aboutUs']);
 //contact
 $router->get('contact', [HomeController::class, 'contact']);
+$router->post('contact', [HomeController::class, 'sendContact']);
 //privacy
 $router->get('privacy', [HomeController::class, 'privacy']);
 //đăng nhập

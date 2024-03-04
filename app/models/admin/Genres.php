@@ -63,4 +63,11 @@ class Genres extends BaseModel implements InterfaceModel
         $this->setQuery($sql);
         return $this->execute([$id]);
     }
+    public function count()
+    {
+        $sql = "SELECT count(*) as total FROM $this->table";
+        $this->setQuery($sql);
+        $result = $this->execute();
+        return $result->fetchColumn();
+    }
 }

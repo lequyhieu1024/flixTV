@@ -5,7 +5,7 @@ namespace App\Controllers\Api;
 use App\Models\Client\Comments;
 use App\Models\Client\Movies;
 
-class ApiController
+class ClientApiController
 {
     protected $movie;
     protected $comment;

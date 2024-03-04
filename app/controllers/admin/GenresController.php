@@ -15,8 +15,9 @@ class GenresController extends BaseController implements InterfaceController
     }
     public function index()
     {
+        $count = $this->genre->count();
         $genres = $this->genre->list();
-        return $this->render('admin.genres.index', compact('genres'));
+        return $this->render('admin.genres.index', compact('genres', 'count'));
     }
     public function create()
     {

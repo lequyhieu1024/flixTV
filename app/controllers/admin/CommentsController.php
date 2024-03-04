@@ -14,8 +14,9 @@ class CommentsController extends BaseController
     }
     public function index()
     {
+        $count = $this->comment->count();
         $comments = $this->comment->list();
-        return $this->render('admin.comments.index', compact('comments'));
+        return $this->render('admin.comments.index', compact('comments', 'count'));
     }
     public function destroy($id)
     {

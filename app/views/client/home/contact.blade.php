@@ -23,34 +23,49 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-lg-7 col-xl-8">
-					<form action="#" class="sign__form sign__form--contacts">
+					@if (isset($_SESSION['success']) && isset($_GET['msg']))
+						<span style="color:green">{{ $_SESSION['success']  }}</span>
+					@endif
+					<form method="POST" class="sign__form sign__form--contacts">
 						<div class="row">
 							<div class="col-12 col-xl-6">
 								<div class="sign__group">
-									<input type="text" name="name" class="sign__input" placeholder="Họ và tên">
+									<input type="text" name="fullname" class="sign__input" placeholder="Họ và tên">
+									@if (isset($_SESSION['errors']) && isset($_GET['msg']))
+										<span style="color:red">{{ $_SESSION['errors']['fullname']  }}</span>
+									@endif
 								</div>
 							</div>
 
 							<div class="col-12 col-xl-6">
 								<div class="sign__group">
 									<input type="text" name="email" class="sign__input" placeholder="Email">
+									@if (isset($_SESSION['errors']) && isset($_GET['msg']))
+										<span style="color:red">{{ $_SESSION['errors']['email']  }}</span>
+									@endif
 								</div>
 							</div>
 
 							<div class="col-12">
 								<div class="sign__group">
 									<input type="text" name="subject" class="sign__input" placeholder="Tiêu đề">
+									@if (isset($_SESSION['errors']) && isset($_GET['msg']))
+										<span style="color:red">{{ $_SESSION['errors']['subject']  }}</span>
+									@endif
 								</div>
 							</div>
 
 							<div class="col-12">
 								<div class="sign__group">
-									<textarea name="text" class="sign__textarea" placeholder="Nội dung"></textarea>
+									<textarea  name="content" class="sign__textarea" placeholder="Nội dung"></textarea>
+									@if (isset($_SESSION['errors']) && isset($_GET['msg']))
+										<span style="color:red">{{ $_SESSION['errors']['content']  }}</span>
+									@endif
 								</div>
 							</div>
 
 							<div class="col-12 col-xl-3">
-								<button type="button" class="sign__btn">Gửi</button>
+								<button type="submit" class="sign__btn">Gửi</button>
 							</div>
 						</div>
 					</form>	

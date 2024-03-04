@@ -16,11 +16,11 @@ class Genres extends BaseModel
     }
     public function countMoviesOfGenres()
     {
-        $sql = "SELECT $this->table2.name, COUNT(*) as count
-        FROM $this->table
-        INNER JOIN $this->table2 ON $this->table.genre_id = $this->table2.id
-        WHERE $this->table.flag = 0
-        GROUP BY $this->table2.name";
+        $sql = "SELECT COUNT({$this->table}.id) as count, {$this->table2}.name as genre_name
+    FROM {$this->table}
+    INNER JOIN {$this->table2} ON {$this->table}.genre_id = {$this->table2}.id
+    WHERE {$this->table}.flag = 0
+    GROUP BY {$this->table2}.name";
 
         $this->setQuery($sql);
         $result = $this->loadAllRows();
@@ -28,7 +28,7 @@ class Genres extends BaseModel
         // Xây dựng mảng kết quả
         $counts = [];
         foreach ($result as $row) {
-            $counts[$row->name] = $row->count;
+            $counts[$row->genre_name] = $row->count;
         }
         return $counts;
     }

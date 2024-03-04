@@ -8,7 +8,7 @@
 					<div class="main__title">
 						<h2>Comments</h2>
 
-						<span class="main__title-stat">21 356 total</span>
+						<span class="main__title-stat">Tổng: {{!empty($count) ? $count : 0}}</span>
 
 						<div class="main__title-wrap">
 							<!-- filter sort -->

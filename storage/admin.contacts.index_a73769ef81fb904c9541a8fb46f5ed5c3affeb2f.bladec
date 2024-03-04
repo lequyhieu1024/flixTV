@@ -6,12 +6,9 @@
  <!-- main title -->
  <div class="col-12">
  <div class="main__title">
- <h2><a href="<?php echo \htmlentities(routeAdmin('genres/add')??'', ENT_QUOTES, 'UTF-8', false); ?>" class="main__title-link">+ thể loại mới</a></h2>
+ <h2>Liên hệ</h2>
 
- <span class="main__title-stat">Tổng:
- <?php echo \htmlentities(!empty($count) ? $count : '0'??'', ENT_QUOTES, 'UTF-8', false); ?>
-
- </span>
+ <span class="main__title-stat">Chưa phản hồi: <?php echo \htmlentities(!empty($count) ? $count : 0??'', ENT_QUOTES, 'UTF-8', false); ?> </span>
 
  <div class="main__title-wrap">
  <!-- filter sort -->
@@ -42,48 +39,64 @@
  </div>
  </div>
  <!-- end main title -->
- <?php if(isset($_SESSION['success']) && isset($_GET['msg'])): ?>
- <span style="color:green"><?php echo \htmlentities($_SESSION['success']??'', ENT_QUOTES, 'UTF-8', false); ?> </span> <br>
- <?php endif; ?>
- </div> <br>
+ 
+ </div>
  <!-- comments -->
  <div class="col-12">
  <div class="main__table-wrap">
+ <?php if(isset($_SESSION['success']) && isset($_GET['msg'])): ?>
+ <span style="color:green"><?php echo \htmlentities($_SESSION['success']??'', ENT_QUOTES, 'UTF-8', false); ?> </span> <br>
+ <?php endif; ?>
  <table class="main__table">
  <thead>
  <tr>
- <th class="col-2">ID</th>
- <th class="col-3">Thể loại</th>
+ <?php /* <th class="col-2">ID</th> */ ?>
+ <th class="col-3">Tiêu đề</th>
+ <th class="col-4">Nội dung</th>
+ <th class="col-4">Tên người gửi</th>
+ <th class="col-4">Email</th>
  <th class="col-4">Trạng thái</th>
  <th>ACTIONS</th>
  </tr>
  </thead>
 
  <tbody>
- <?php $__currentLoopData = $genres; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ <?php $__currentLoopData = $contacts; $this->addLoop($__currentLoopData);$this->getFirstLoop();
  foreach($__currentLoopData as $item): $loop = $this->incrementLoopIndices();  ?>
  <tr>
  <td>
- <div class="main__table-text"><?php echo \htmlentities($item->id??'', ENT_QUOTES, 'UTF-8', false); ?></div>
+ <div class="main__table-text"><?php echo \htmlentities($item->subject??'', ENT_QUOTES, 'UTF-8', false); ?></div>
  </td>
  <td>
- <div class="main__table-text"><a href="#"><?php echo \htmlentities($item->name??'', ENT_QUOTES, 'UTF-8', false); ?></a></div>
+ <div class="main__table-text"><a href="#"><?php echo \htmlentities($item->content??'', ENT_QUOTES, 'UTF-8', false); ?></a></div>
+ </td>
+ <td>
+ <div class="main__table-text"><a href="#"><?php echo \htmlentities($item->fullname??'', ENT_QUOTES, 'UTF-8', false); ?></a></div>
+ </td>
+ <td>
+ <div class="main__table-text"><a href="#"><?php echo \htmlentities($item->email??'', ENT_QUOTES, 'UTF-8', false); ?></a></div>
  </td>
  <td>
  <?php if($item->flag == 1): ?>
- <div class="main__table-text main__table-text--red">Đã ẩn</div>
+ <div class="main__table-text main__table-text--red">Đã phản hồi</div>
  <?php $stroke = 'stroke="red"' ?>
  <?php else: ?>
- <div class="main__table-text main__table-text--green">Có thể thấy</div>
+ <div class="main__table-text main__table-text--green">Chưa phản hồi</div>
  <?php $stroke = 'stroke=""' ?>
  <?php endif; ?>
  </div>
  </td>
  <td>
  <div class="main__table-btns">
- <a href="<?php echo \htmlentities(routeAdmin('genres/update-flag/'.$item->id.'/'.$item->flag)??'', ENT_QUOTES, 'UTF-8', false); ?>" onclick="return confirm('Bạn có muốn thay đổi trạng thái?')" class="main__table-btn main__table-btn--banned">
+ <?php if($item->flag == 0): ?>
+ <a href="<?php echo \htmlentities(routeAdmin('contacts/update-flag/'.$item->id.'/'.$item->flag)??'', ENT_QUOTES, 'UTF-8', false); ?>" onclick="return confirm('Bạn có muốn thay đổi trạng thái?')" class="main__table-btn main__table-btn--banned">
  <svg xmlns="http://www.w3.org/2000/svg" <?php echo $stroke ?>  viewBox="0 0 24 24"><path d="M12,13a1.49,1.49,0,0,0-1,2.61V17a1,1,0,0,0,2,0V15.61A1.49,1.49,0,0,0,12,13Zm5-4V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z" /></svg>
  </a>
+ <?php else: ?>
+ <a href="#" class="main__table-btn main__table-btn--banned">
+ <svg xmlns="http://www.w3.org/2000/svg" <?php echo $stroke ?>  viewBox="0 0 24 24"><path d="M12,13a1.49,1.49,0,0,0-1,2.61V17a1,1,0,0,0,2,0V15.61A1.49,1.49,0,0,0,12,13Zm5-4V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z" /></svg>
+ </a>
+ <?php endif; ?>
  <?php /* <div id="modal-status" class="zoom-anim-dialog mfp-hide modal">
  <h6 class="modal__title">Thay đổi trạng thái</h6>
 
@@ -95,12 +108,12 @@
  </div>
  </div> */ ?>
  <?php /* <?php echo \htmlentities(routeAdmin('movies/edit/'.$item->id)??'', ENT_QUOTES, 'UTF-8', false); ?> */ ?>
- <a href="<?php echo \htmlentities(routeAdmin('genres/edit/'.$item->id)??'', ENT_QUOTES, 'UTF-8', false); ?>" class="main__table-btn main__table-btn--edit">
+ <?php /* <a href="<?php echo \htmlentities(routeAdmin('contacts/edit/'.$item->id)??'', ENT_QUOTES, 'UTF-8', false); ?>" class="main__table-btn main__table-btn--edit">
  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z"/></svg>
- </a>
- <a href="<?php echo \htmlentities(routeAdmin('genres/delete/'.$item->id)??'', ENT_QUOTES, 'UTF-8', false); ?>" onclick="return confirm('Bạn có muốn xóa không ?')" class="main__table-btn main__table-btn--delete">
+ </a> */ ?>
+ <?php /* <a href="<?php echo \htmlentities(routeAdmin('contacts/delete/'.$item->id)??'', ENT_QUOTES, 'UTF-8', false); ?>" onclick="return confirm('Bạn có muốn xóa không ?')" class="main__table-btn main__table-btn--delete">
  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"/></svg>
- </a>
+ </a> */ ?>
  <!-- modal delete -->
  <?php /* <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
  <h6 class="modal__title">Xóa phim</h6>
@@ -163,7 +176,7 @@
  applyChange.addEventListener('click',() =>{
  const id = applyChange.dataset.id;
  const flag = applyChange.dataset.flag;
- alert("<?php echo \htmlentities(routeAdmin('genres/update-flag/')??'', ENT_QUOTES, 'UTF-8', false); ?>"+ id+"/"+flag);
+ alert("<?php echo \htmlentities(routeAdmin('contacts/update-flag/')??'', ENT_QUOTES, 'UTF-8', false); ?>"+ id+"/"+flag);
  })
  applyDel.addEventListener('click',() =>{
  const id = applyDel.dataset.id;

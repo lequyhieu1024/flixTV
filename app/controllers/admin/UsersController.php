@@ -14,8 +14,9 @@ class UsersController extends BaseController
     }
     public function index()
     {
+        $count = $this->user->count();
         $users = $this->user->list();
-        return $this->render('admin.users.index', compact('users'));
+        return $this->render('admin.users.index', compact('users', 'count'));
     }
     public function destroy($id)
     {

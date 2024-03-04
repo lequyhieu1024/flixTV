@@ -118,9 +118,6 @@ class Movies extends BaseModel
                     WHEN title LIKE '%$kw%' THEN 2
                     ELSE 3
                 END";
-
-
-
         $this->setQuery($sql);
         return $this->loadAllRows([]);
     }

@@ -68,4 +68,11 @@ class Link extends BaseModel implements InterfaceModel
         $this->setQuery($sql);
         return $this->loadAllRows([$id]);
     }
+    public function count()
+    {
+        $sql = "SELECT count(*) as total FROM $this->table";
+        $this->setQuery($sql);
+        $result = $this->execute();
+        return $result->fetchColumn();
+    }
 }
