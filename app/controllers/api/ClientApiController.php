@@ -36,4 +36,32 @@ class ClientApiController
         echo json_encode($getAllComments);
         exit;
     }
+    public function sendCommentStore($id, $slug)
+    {
+        $data = [
+            'movie_id' => $id,
+            'user_id' => $_SESSION['id'],
+            'comment' => $_POST['comment']
+        ];
+
+        $errors = [];
+
+        if (empty($data['user_id'])) {
+            $errors['users'] = "Vui lòng đăng nhập để có thể bình luận";
+            echo json_encode(['success' => false, 'errors' => $errors]);
+            return;
+        }
+
+        if (empty($data['comment'])) {
+            $errors['comment'] = "Không được bỏ trống bình luận";
+            echo json_encode(['success' => false, 'errors' => $errors]);
+            return;
+        }
+
+        // Gửi bình luận
+        $this->comment->sendComment($data);
+
+        // Trả về phản hồi thành công
+        echo json_encode(['success' => true, 'message' => 'Đã bình luận']);
+    }
 }

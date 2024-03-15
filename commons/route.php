@@ -91,7 +91,7 @@ $router->get('/', [HomeController::class, 'index']);
 // chi tiết phim
 $router->get('detail/{id}/{slug}', [MovieController::class, 'detail']);
 //phim theo thể loại
-$router->get('movies-by-genres/{id}/{slug}', [MovieController::class, 'moviesByGenres']);
+$router->get('movies-by-genres/{id}', [MovieController::class, 'moviesByGenres']);
 //danh sách thể loại
 $router->get('list-genres', [GenresController::class, 'list']);
 // tìm kiếm
@@ -102,6 +102,8 @@ $router->get('get-viewest-movies', [ClientApiController::class, 'getViewestMovie
 $router->get('get-newest-movies', [ClientApiController::class, 'getNewestMovies']);
 //all comment ajax
 $router->get('load-comments/{id}', [ClientApiController::class, 'getAllComments']);
+//send comment
+$router->post('send-comment/{id}/{slug}', [ClientApiController::class, 'sendCommentStore']);
 
 //comment
 // $router->post

@@ -157,7 +157,7 @@
 										</ul>
 									</div> --}}
 									{{-- {{route('send-comment/'.$movie->id.'/'.convert_slug($movie->title)) }} --}}
-									<form action="#" method="POST" class="comments__form">
+									<form class="comments__form" id="commentForm">
 										@if (isset($_SESSION['errors']) && isset($_GET['msg']))
 											<span style="color:red">{{ $_SESSION['errors']['comment'] }} </span>
 										@endif
